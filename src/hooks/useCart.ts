@@ -17,7 +17,7 @@ export function useCart() {
   }
 
   function removerItem(index: number) {
-    const filterItems = items.filter((itemCart, i) => i !== index);
+    const filterItems = items.filter((_, i) => i !== index);
     setItems(filterItems);
   }
 
