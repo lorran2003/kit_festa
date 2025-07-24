@@ -4,13 +4,9 @@ import { useContext } from "react";
 import { ControlMessageContext } from "./CreateContext";
 import type { kitsType } from "./CardapioKitsFesta";
 
-type ModalPedidoProps = {
-  items: kitsType[];
-  removerItem: (index: number) => void
-}
+export function ModalPedido() {
 
-export function ModalPedido({items, removerItem}: ModalPedidoProps) {
-  const { modalCart, setModalCart } = useContext(ControlMessageContext);
+  const { modalCart, setModalCart, order, removerItem } = useContext(ControlMessageContext);
 
   return (
     <>
@@ -24,7 +20,7 @@ export function ModalPedido({items, removerItem}: ModalPedidoProps) {
 
         <FontAwesomeIcon icon={faCartShopping} color='white' size='xl' />
 
-        <span className="text-zinc-50 text-xl">{items.length}</span>
+        <span className="text-zinc-50 text-xl">{order.length}</span>
 
       </button>
 
@@ -46,11 +42,11 @@ export function ModalPedido({items, removerItem}: ModalPedidoProps) {
 
           <h2 className="text-xl font-bold my-4 italic">Seu pedido 🥳 !!!</h2>
           {
-            items.length > 0 ? (
+            order.length > 0 ? (
               <div className="text-gray-700">
                 <p>Items no carrinho:</p>
                 <ul className="list-disc pr-5">
-                  {items.map((item: kitsType, index: number) => (
+                  {order.map((item: kitsType, index: number) => (
                     <li key={index} className="grid grid-cols-3 justify-start items-center py-2">
                       <p className="text-lg italic">{item.nome}</p>
                       <p className="text-lg italic">{item.preco}</p>
@@ -67,7 +63,7 @@ export function ModalPedido({items, removerItem}: ModalPedidoProps) {
                 </ul>
               </div>
             ) : (
-              <p className="text-gray-700">Seu carrinho está vazio.</p>
+              <p className="text-gray-700">Seu carrinho está vazio! 🫣</p>
             )
           }
           <p className="text-gray-700">Entraremos em contato pelo WhatsApp para confirmar os detalhes.</p>

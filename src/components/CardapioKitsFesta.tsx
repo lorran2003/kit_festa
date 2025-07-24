@@ -1,28 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ControlMessageContext } from "./CreateContext";
+import AlertMessage from "./AlertMessage";
 
 export interface kitsType {
   nome: string;
   pessoas: string;
   salgados: number;
   docinhos: number;
-  torta: string;
+  tortaLength: number;
   preco: string;
   destaque: string;
 }
 
-type CardapioKitsFestaProps = {
-  addItem: (item: kitsType) => void
-}
-
-export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
-
-  const { setNotificationMessage } = useContext(ControlMessageContext);
-
-  const addOrder = (kits: kitsType) => {
-    addItem(kits);
-    setNotificationMessage(true);
-  }
+export function CardapioKitsFesta() {
 
   const kits: kitsType[] = [
     {
@@ -30,7 +20,7 @@ export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
       pessoas: "10 a 15 pessoas",
       salgados: 120,
       docinhos: 45,
-      torta: "Torta 20cm",
+      tortaLength: 20,
       preco: "R$ 170,00",
       destaque: "Mais pedido!",
     },
@@ -39,7 +29,7 @@ export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
       pessoas: "20 a 25 pessoas",
       salgados: 200,
       docinhos: 75,
-      torta: "Torta 25cm",
+      tortaLength: 25,
       preco: "R$ 240,00",
       destaque: "Equilíbrio perfeito",
     },
@@ -48,11 +38,29 @@ export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
       pessoas: "30 a 35 pessoas",
       salgados: 280,
       docinhos: 105,
-      torta: "Torta 30cm",
+      tortaLength: 30,
       preco: "R$ 320,00",
       destaque: "Para grandes festas",
     },
   ];
+
+  const [order, setOrder] = useState<kitsType>({
+    nome: "",
+    pessoas: "",
+    salgados: 0,
+    docinhos: 0,
+    tortaLength: 0,
+    preco: "",
+    destaque: ""
+  });
+
+  const handleAddItem = (kit: kitsType) => {
+    setNotificationMessage(true);
+    setOrder(kit);
+  };
+
+  const { setNotificationMessage } = useContext(ControlMessageContext);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
@@ -72,12 +80,12 @@ export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
               <ul className="text-sm text-gray-700 space-y-1 mb-4">
                 <li>🥟 {kit.salgados} salgadinhos (16g)</li>
                 <li>🍬 {kit.docinhos} docinhos</li>
-                <li>🍰 {kit.torta}</li>
+                <li>🍰 Torta de {kit.tortaLength}cm</li>
               </ul>
               <div className="text-center mt-4 flex flex-col gap-2">
                 <span className="text-lg font-bold text-pink-600">{kit.preco}</span>
                 <button
-                  onClick={() => addOrder(kit)}
+                  onClick={() => handleAddItem(kit)}
                   className="mt-2 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition"
                 >
                   Adicionar ao carrinho
@@ -87,6 +95,7 @@ export function CardapioKitsFesta({ addItem }: CardapioKitsFestaProps) {
           </div>
         ))}
       </div>
-    </div>
+      <AlertMessage order={order} />
+    </div >
   );
 }

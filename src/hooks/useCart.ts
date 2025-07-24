@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { kitsType } from "../components/CardapioKitsFesta";
 
+
 export function useCart() {
   const [items, setItems] = useState<kitsType[]>(() => {
     const storedItems = localStorage.getItem("pedidoKitFesta");
@@ -13,7 +14,6 @@ export function useCart() {
 
   function addItem(newItem: kitsType) {
     setItems([...items, newItem]);
-    console.log("bag:" + items);
   }
 
   function removerItem(index: number) {
