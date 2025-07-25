@@ -7,7 +7,7 @@ export interface kitsType {
   pessoas: string;
   salgados: number;
   docinhos: number;
-  tortaLength: number;
+  tamanhoTorta: number;
   preco: string;
   destaque: string;
 }
@@ -20,8 +20,8 @@ export function CardapioKitsFesta() {
       pessoas: "10 a 15 pessoas",
       salgados: 120,
       docinhos: 45,
-      tortaLength: 20,
-      preco: "R$ 170,00",
+      tamanhoTorta: 20,
+      preco: "170,00",
       destaque: "Mais pedido!",
     },
     {
@@ -29,8 +29,8 @@ export function CardapioKitsFesta() {
       pessoas: "20 a 25 pessoas",
       salgados: 200,
       docinhos: 75,
-      tortaLength: 25,
-      preco: "R$ 240,00",
+      tamanhoTorta: 25,
+      preco: "240,00",
       destaque: "Equilíbrio perfeito",
     },
     {
@@ -38,8 +38,8 @@ export function CardapioKitsFesta() {
       pessoas: "30 a 35 pessoas",
       salgados: 280,
       docinhos: 105,
-      tortaLength: 30,
-      preco: "R$ 320,00",
+      tamanhoTorta: 30,
+      preco: "320,00",
       destaque: "Para grandes festas",
     },
   ];
@@ -49,7 +49,7 @@ export function CardapioKitsFesta() {
     pessoas: "",
     salgados: 0,
     docinhos: 0,
-    tortaLength: 0,
+    tamanhoTorta: 0,
     preco: "",
     destaque: ""
   });
@@ -61,9 +61,8 @@ export function CardapioKitsFesta() {
 
   const { setNotificationMessage } = useContext(ControlMessageContext);
 
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
+  <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
       <div className="max-w-5xl mx-auto text-center mb-10">
         <h1 className="text-4xl font-extrabold text-pink-600 mb-2">Cardápio de Kits de Festa</h1>
         <p className="text-gray-600 text-lg">Escolha o kit ideal para sua comemoração. Tudo feito com muito carinho e sabor!</p>
@@ -80,11 +79,13 @@ export function CardapioKitsFesta() {
               <ul className="text-sm text-gray-700 space-y-1 mb-4">
                 <li>🥟 {kit.salgados} salgadinhos (16g)</li>
                 <li>🍬 {kit.docinhos} docinhos</li>
-                <li>🍰 Torta de {kit.tortaLength}cm</li>
+                <li>🍰 Torta de {kit.tamanhoTorta}cm</li>
               </ul>
               <div className="text-center mt-4 flex flex-col gap-2">
-                <span className="text-lg font-bold text-pink-600">{kit.preco}</span>
+                <span className="text-lg font-bold text-pink-600">R$ {kit.preco}</span>
                 <button
+                  type="button"
+                  aria-label={`Adicionar ${kit.nome} ao carrinho`}
                   onClick={() => handleAddItem(kit)}
                   className="mt-2 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition"
                 >

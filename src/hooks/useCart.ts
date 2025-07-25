@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
-import type { kitsType } from "../components/CardapioKitsFesta";
 
+export type orderToCart = {
+  nome: string;
+  pessoas: string;
+  salgados: number;
+  docinhos: number;
+  torta: {
+    tamanho: number;
+    sabor: string;
+    image: string
+  };
+  preco: string;
+}
 
 export function useCart() {
-  const [items, setItems] = useState<kitsType[]>(() => {
+  const [items, setItems] = useState<orderToCart[]>(() => {
     const storedItems = localStorage.getItem("pedidoKitFesta");
     return storedItems ? JSON.parse(storedItems) : [];
   });
@@ -12,7 +23,7 @@ export function useCart() {
     localStorage.setItem("pedidoKitFesta", JSON.stringify(items));
   }, [items]);
 
-  function addItem(newItem: kitsType) {
+  function addItem(newItem: orderToCart) {
     setItems([...items, newItem]);
   }
 
