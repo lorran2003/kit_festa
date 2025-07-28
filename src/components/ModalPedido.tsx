@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { ControlMessageContext } from "./CreateContext";
 import type { orderToCart } from "../hooks/useCart";
+import { ExtraPie } from "./ExtraPie";
 
 export function ModalPedido() {
 
@@ -91,6 +92,9 @@ export function ModalPedido() {
               <p className="text-gray-700">Seu carrinho está vazio! 🫣</p>
             )
           }
+
+          < ExtraPie />
+
           <div className="grid grid-cols-2 justify-center items-center gap-2">
 
             <button type="button"

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ControlMessageContext } from "./CreateContext";
-import AlertMessage from "./AlertMessage";
+import SelectFlavor from "./modalSelectFlavor/ModalOptions";
 
 export interface kitsType {
   nome: string;
@@ -62,7 +62,7 @@ export function CardapioKitsFesta() {
   const { setNotificationMessage } = useContext(ControlMessageContext);
 
   return (
-  <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
       <div className="max-w-5xl mx-auto text-center mb-10">
         <h1 className="text-4xl font-extrabold text-pink-600 mb-2">Cardápio de Kits de Festa</h1>
         <p className="text-gray-600 text-lg">Escolha o kit ideal para sua comemoração. Tudo feito com muito carinho e sabor!</p>
@@ -96,7 +96,7 @@ export function CardapioKitsFesta() {
           </div>
         ))}
       </div>
-      <AlertMessage order={order} />
+      <SelectFlavor order={order} />
     </div >
   );
 }
