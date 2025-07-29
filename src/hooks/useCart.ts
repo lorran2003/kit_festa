@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { UUIDTypes } from "uuid";
 
-export type orderToCart = {
+export type OrderToCartType = {
   id: UUIDTypes;
   nome: string;
   pessoas: string;
@@ -16,7 +16,7 @@ export type orderToCart = {
 }
 
 export function useCart() {
-  const [items, setItems] = useState<orderToCart[]>(() => {
+  const [items, setItems] = useState<OrderToCartType[]>(() => {
     const storedItems = localStorage.getItem("pedidoKitFesta");
     return storedItems ? JSON.parse(storedItems) : [];
   });
@@ -25,12 +25,12 @@ export function useCart() {
     localStorage.setItem("pedidoKitFesta", JSON.stringify(items));
   }, [items]);
 
-  function addItem(newItem: orderToCart) {
+  function addItem(newItem: OrderToCartType) {
     setItems([...items, newItem]);
   }
 
-  function removerItem(index: number) {
-    const filterItems = items.filter((_, i) => i !== index);
+  function removerItem(idItem: UUIDTypes) {
+    const filterItems = items.filter((item) => item.id !== idItem);
     setItems(filterItems);
   }
 

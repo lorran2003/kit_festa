@@ -4,7 +4,7 @@ import brigadeiro from "../../assets/image/brigadeiro.png";
 import boloFesta from "../../assets/image/boloFesta.png";
 import maracuja from "../../assets/image/maracuja.png";
 import type { kitsType } from "../CardapioKitsFesta";
-import type { orderToCart } from "../../hooks/useCart";
+import type { OrderToCartType } from "../../hooks/useCart";
 import { SelectPie } from "./SelectPie";
 import { SelectItems, type DataItemType, type ItemSelecionadoType } from "./SelectItems";
 import { v4 as uuidv4 } from "uuid";
@@ -117,7 +117,7 @@ export function ModalOptions({ order }: { order: kitsType }) {
 
     try {
 
-      const newOrder: orderToCart = {
+      const newOrder: OrderToCartType = {
         id: uuidv4(),
         salgados: salgado,
         docinhos: docinho,

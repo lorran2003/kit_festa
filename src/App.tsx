@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CardapioKitsFesta } from './components/CardapioKitsFesta'
-import { ModalPedido } from './components/ModalPedido';
+import { ModalPedido } from './components/modalCart/ModalPedido';
 import { ControlMessageContext } from './components/CreateContext';
 import { useCart } from './hooks/useCart';
 import { Bounce, ToastContainer } from 'react-toastify';

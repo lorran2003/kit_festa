@@ -1,17 +1,24 @@
-import { faCartShopping, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { ControlMessageContext } from "./CreateContext";
-import type { orderToCart } from "../hooks/useCart";
-import { ExtraPie } from "./ExtraPie";
+import { ControlMessageContext } from "../CreateContext";
+import type { OrderToCartType } from "../../hooks/useCart";
+import { ExtraPie } from "../ExtraPie";
+import { ListOrder } from "./ListOrder";
+import { submitMessageWhatsApp } from "../../func/wtt";
 
 export function ModalPedido() {
 
   const { modalCart, setModalCart, order, removerItem } = useContext(ControlMessageContext);
 
+  const submitWpp = () => {
+    setModalCart(false);
+    submitMessageWhatsApp(order);
+  }
+
   const totalPrice = () => {
 
-    const convertNumber = order.map((item: orderToCart) => Number(item.preco.replace(',', '.')));
+    const convertNumber = order.map((item: OrderToCartType) => Number(item.preco.replace(',', '.')));
 
     return convertNumber.reduce((prev: number, cur: number) => prev + cur, 0).toFixed(2);
 
@@ -59,50 +66,9 @@ export function ModalPedido() {
             order.length > 0 ? (
               <div className="text-gray-700">
                 <p>Items no carrinho:</p>
-                <ul className="list-disc pr-5">
-                  {order.map((item: orderToCart, index: number) => (
-                    <li key={index} className="flex flex-col gap-2 justify-start items-start py-2
-                     before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gray-200 before:rounded-full
-                    ">
-
-                      <p className="text-lg italic">{item.nome}:</p>
-
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>🥟salgadinhos (16g):</li>
-                        {
-                          item.salgados.map((salgado, index: number) => (
-                            <li key={index}>🥟 {salgado.sabor}</li>
-                          ))
-                        }
-                      </ul>
-
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>🍬docinhos:</li>
-                        {
-                          item.docinhos.map((docinho, index: number) => (
-                            <li key={index}>🥟 {docinho.sabor}</li>
-                          ))
-                        }
-                      </ul>
-
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>🍰 Torta: {item.torta.sabor}</li>
-                        <li>📏 Torta de {item.torta.tamanho}cm</li>
-                      </ul>
-
-                      <p className="text-lg italic">R$ {item.preco}</p>
-
-                      <button
-                        type="button"
-                        aria-label="Remover item do carrinho"
-                        className="roudned-sm w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded shadow transition"
-                        onClick={() => removerItem(index)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} color='white' size="lg" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                <div className="list-disc pr-5">
+                  <ListOrder order={order} removerItem={removerItem} />
+                </div>
               </div>
             ) : (
               <p className="text-gray-700">Seu carrinho está vazio! 🫣</p>
@@ -127,10 +93,7 @@ export function ModalPedido() {
               typeof="button"
               aria-label="Finalizar pedido"
               className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition w-full"
-              onClick={() => {
-                setModalCart(false);
-                alert("Pedido finalizado com sucesso! 🎉");
-              }}
+              onClick={() => submitWpp()}
             >
               Finalizar Pedido
 
