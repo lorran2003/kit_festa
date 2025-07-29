@@ -8,7 +8,7 @@ type SelectPieProps = {
 
 export function SelectPie({ selectedPie, pie, setSelectedPie }: SelectPieProps) {
     return (
-        <div className="after:block after:w-full after:h-0.5 after:bg-gray-400 after:rounded-full lg:after:h-full lg:after:w-0.5 lg:flex lg:justify-between">
+        <div className="after:static after:w-full after:h-0.5 after:bg-gray-400 after:rounded-full lg:after:h-full lg:after:w-0.5 lg:flex lg:justify-between">
 
             <div className="flex flex-col items-center justify-center lg:justify-start gap-4">
 

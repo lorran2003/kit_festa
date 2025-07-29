@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ControlMessageContext } from "./CreateContext";
-import SelectFlavor from "./modalSelectFlavor/ModalOptions";
+import { ModalOptions } from "./modalSelectFlavor/ModalOptions";
 
 export interface kitsType {
   nome: string;
@@ -96,7 +96,7 @@ export function CardapioKitsFesta() {
           </div>
         ))}
       </div>
-      <SelectFlavor order={order} />
+      <ModalOptions order={order} />
     </div >
   );
 }

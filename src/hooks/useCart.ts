@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import type { UUIDTypes } from "uuid";
 
 export type orderToCart = {
+  id: UUIDTypes;
   nome: string;
   pessoas: string;
-  salgados: number;
-  docinhos: number;
+  salgados: { sabor: string, quantidade: number }[];
+  docinhos: { sabor: string, quantidade: number }[];
   torta: {
     tamanho: number;
     sabor: string;

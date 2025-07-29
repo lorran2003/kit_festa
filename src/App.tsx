@@ -3,6 +3,7 @@ import { CardapioKitsFesta } from './components/CardapioKitsFesta'
 import { ModalPedido } from './components/ModalPedido';
 import { ControlMessageContext } from './components/CreateContext';
 import { useCart } from './hooks/useCart';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 
 export default function App() {
@@ -10,7 +11,7 @@ export default function App() {
   const [modalCart, setModalCart] = useState<boolean>(false);
   const { addItem, removerItem, items } = useCart();
 
-   const isModalOrNotificationOpen = notificationMessage || modalCart;
+  const isModalOrNotificationOpen = notificationMessage || modalCart;
 
   useEffect(() => {
     if (isModalOrNotificationOpen) {
@@ -28,6 +29,20 @@ export default function App() {
     }>
       <ModalPedido />
       <CardapioKitsFesta />
+      <ToastContainer
+        position="top-left"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        limit={1}
+      />
     </ControlMessageContext>
   )
 }

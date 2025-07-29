@@ -68,8 +68,24 @@ export function ModalPedido() {
                       <p className="text-lg italic">{item.nome}:</p>
 
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>🥟 {item.salgados} salgadinhos (16g)</li>
-                        <li>🍬 {item.docinhos} docinhos</li>
+                        <li>🥟salgadinhos (16g):</li>
+                        {
+                          item.salgados.map((salgado, index: number) => (
+                            <li key={index}>🥟 {salgado.sabor}</li>
+                          ))
+                        }
+                      </ul>
+
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>🍬docinhos:</li>
+                        {
+                          item.docinhos.map((docinho, index: number) => (
+                            <li key={index}>🥟 {docinho.sabor}</li>
+                          ))
+                        }
+                      </ul>
+
+                      <ul className="text-sm text-gray-700 space-y-1">
                         <li>🍰 Torta: {item.torta.sabor}</li>
                         <li>📏 Torta de {item.torta.tamanho}cm</li>
                       </ul>
