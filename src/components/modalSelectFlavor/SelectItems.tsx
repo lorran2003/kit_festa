@@ -1,12 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import type { DataItemType } from "../../const/datas";
 
 export type ItemSelecionadoType = { sabor: string; quantidade: number }
-
-export type DataItemType = {
-    name: string;
-    image: string;
-}
 
 type SelectedItemsProsp = {
     nameItem: string

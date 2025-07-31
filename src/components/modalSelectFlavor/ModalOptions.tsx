@@ -1,105 +1,23 @@
 import { useContext, useState } from "react";
-import { ControlMessageContext } from "../CreateContext";
-import brigadeiro from "../../assets/image/brigadeiro.png";
-import boloFesta from "../../assets/image/boloFesta.png";
-import maracuja from "../../assets/image/maracuja.png";
-import type { kitsType } from "../CardapioKitsFesta";
+import { ControlComponentsContext } from "../CreateContext";
 import type { OrderToCartType } from "../../hooks/useCart";
 import { SelectPie } from "./SelectPie";
-import { SelectItems, type DataItemType, type ItemSelecionadoType } from "./SelectItems";
+import { SelectItems, type ItemSelecionadoType} from "./SelectItems";
 import { v4 as uuidv4 } from "uuid";
-import bolinhaQueijo from "../../assets/image/bolinhaQueijo.png";
-import coxinha from "../../assets/image/coxinha.png";
-import kibe from "../../assets/image/kibe.png";
-import salsicha from "../../assets/image/salsicha.jpg";
-import calabresa from "../../assets/image/calabresa.jpg";
-import misto from "../../assets/image/misto.jpg";
-import beijinho from "../../assets/image/beijinho.jpg";
-import brigadeiroDocinho from "../../assets/image/brigadeiroDocinho.png";
-import cajuzinho from "../../assets/image/cajuzinho.jpg";
-import mistoDocinho from "../../assets/image/mistoDocinho.jpg";
 import { notify } from "../../func/notify";
-export type PieType = {
-  image: string;
-  name: string;
-  description: string;
-}
+import { docinhos, pies, salgados, type DataPieType, type kitsType } from "../../const/datas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export function ModalOptions({ order }: { order: kitsType }) {
 
-  const pie: PieType[] = [
-    {
-      image: brigadeiro,
-      name: "Brigadeiro",
-      description: "Bolo de chocolate recheado com brigadeiro, coberto com chocolate cremoso e finalizado com granulado."
-    },
-    {
-      image: boloFesta,
-      name: "Bolo festa",
-      description: "Bolo de baunilha recheado com doce de leite e ameixa, coberto com chantilly, coco ralado e um toque de doce de leite."
-    },
-    {
-      image: maracuja,
-      name: "Maracujá c/chantilly",
-      description: "Bolo de baunilha recheado e coberto com creme de maracujá e chantilly."
-    }
-  ]
-
-  const salgados: DataItemType[] = [
-    {
-      name: "Misto",
-      image: misto
-    },
-    {
-      name: "Bolinha de Queijo",
-      image: bolinhaQueijo
-    },
-    {
-      name: "Kibe",
-      image: kibe
-    },
-    {
-      name: "Calabresa",
-      image: calabresa
-    },
-    {
-      name: "Coxinha de Frango",
-      image: coxinha
-    },
-    {
-      name: "Enroladinho de Salsicha",
-      image: salsicha
-    }
-  ];
-
-  const docinhos: DataItemType[] = [
-    {
-      name: "Misto",
-      image: mistoDocinho
-    },
-    {
-      name: "Beijinho",
-      image: beijinho
-    },
-    {
-      name: "Brigadeiro",
-      image: brigadeiroDocinho
-    },
-    {
-      name: "Cajuzinho",
-      image: cajuzinho
-    }
-  ]
-
-  const [selectedPie, setSelectedPie] = useState<PieType>(pie[0]);
+  const [selectedPie, setSelectedPie] = useState<DataPieType>(pies.dataPies[0]);
 
   const [salgado, setSalgado] = useState<ItemSelecionadoType[]>([]);
 
-  console.log(salgado)
-
   const [docinho, setDocinho] = useState<ItemSelecionadoType[]>([]);
 
-  const { notificationMessage, setNotificationMessage, setModalCart, addItem } = useContext(ControlMessageContext);
+  const { modalSelectOptions: notificationMessage, setModalSelectOptions: setNotificationMessage, setModalCart, addItem } = useContext(ControlComponentsContext);
 
   const { success, error } = notify();
 
@@ -157,9 +75,9 @@ export function ModalOptions({ order }: { order: kitsType }) {
               setDocinho([]);
               setSalgado([]);
             }}
-            className="absolute right-0 top-0 bg-red-500 hover:bg-red-500 text-zinc-50 font-semibold py-1 px-3 rounded shadow transition sm:py-2 sm:px-4"
+            className="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold py-1 px-3 rounded shadow transition sm:py-2 sm:px-4"
           >
-            Fechar
+            <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
 
@@ -170,7 +88,7 @@ export function ModalOptions({ order }: { order: kitsType }) {
           </h2>
 
           <div className="lg:grid lg:grid-cols-2 w-full">
-            <SelectPie selectedPie={selectedPie} pie={pie} setSelectedPie={setSelectedPie} />
+            <SelectPie selectedPie={selectedPie} pie={pies.dataPies} setSelectedPie={setSelectedPie} />
 
             <div className="flex flex-col gap-4 lg:max-h-[28rem] lg:overflow-auto lg:w-full">
 

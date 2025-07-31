@@ -1,48 +1,9 @@
 import { useContext, useState } from "react";
-import { ControlMessageContext } from "./CreateContext";
+import { ControlComponentsContext } from "./CreateContext";
 import { ModalOptions } from "./modalSelectFlavor/ModalOptions";
-
-export interface kitsType {
-  nome: string;
-  pessoas: string;
-  salgados: number;
-  docinhos: number;
-  tamanhoTorta: number;
-  preco: string;
-  destaque: string;
-}
+import { kits, type kitsType } from "../const/datas";
 
 export function CardapioKitsFesta() {
-
-  const kits: kitsType[] = [
-    {
-      nome: "Kit Pequeno",
-      pessoas: "10 a 15 pessoas",
-      salgados: 120,
-      docinhos: 45,
-      tamanhoTorta: 20,
-      preco: "170,00",
-      destaque: "Mais pedido!",
-    },
-    {
-      nome: "Kit Médio",
-      pessoas: "20 a 25 pessoas",
-      salgados: 200,
-      docinhos: 75,
-      tamanhoTorta: 25,
-      preco: "240,00",
-      destaque: "Equilíbrio perfeito",
-    },
-    {
-      nome: "Kit Grande",
-      pessoas: "30 a 35 pessoas",
-      salgados: 280,
-      docinhos: 105,
-      tamanhoTorta: 30,
-      preco: "320,00",
-      destaque: "Para grandes festas",
-    },
-  ];
 
   const [order, setOrder] = useState<kitsType>({
     nome: "",
@@ -55,15 +16,15 @@ export function CardapioKitsFesta() {
   });
 
   const handleAddItem = (kit: kitsType) => {
-    setNotificationMessage(true);
+    setModalSelectOptions(true);
     setOrder(kit);
   };
 
-  const { setNotificationMessage } = useContext(ControlMessageContext);
+  const { setModalSelectOptions } = useContext(ControlComponentsContext);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4">
-      <div className="max-w-5xl mx-auto text-center mb-10">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white py-10 px-4 relative">
+      <div className="max-w-5xl mx-auto text-center mb-10 z-40">
         <h1 className="text-4xl font-extrabold text-pink-600 mb-2">Cardápio de Kits de Festa</h1>
         <p className="text-gray-600 text-lg">Escolha o kit ideal para sua comemoração. Tudo feito com muito carinho e sabor!</p>
       </div>
@@ -89,7 +50,7 @@ export function CardapioKitsFesta() {
                   onClick={() => handleAddItem(kit)}
                   className="mt-2 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition"
                 >
-                  Adicionar ao carrinho
+                  Montar pedido
                 </button>
               </div>
             </div>

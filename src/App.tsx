@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CardapioKitsFesta } from './components/CardapioKitsFesta'
 import { ModalPedido } from './components/modalCart/ModalPedido';
-import { ControlMessageContext } from './components/CreateContext';
+import { ControlComponentsContext } from './components/CreateContext';
 import { useCart } from './hooks/useCart';
 import { Bounce, ToastContainer } from 'react-toastify';
+import { ModalExtraPie } from './components/modalExtraPie';
 
 
 export default function App() {
-  const [notificationMessage, setNotificationMessage] = useState<boolean>(false);
+  const [modalSelectOptions, setModalSelectOptions] = useState<boolean>(false);
   const [modalCart, setModalCart] = useState<boolean>(false);
-  const { addItem, removerItem, items } = useCart();
-
-  const isModalOrNotificationOpen = notificationMessage || modalCart;
+  const [modalExtraPie, setModalExtraPie] = useState<boolean>(false);
+  const { addItem, removeItem, items, addExtraPie, extraPie, removeExtraPie } = useCart();  
+  const isModalOrNotificationOpen = modalSelectOptions || modalCart || modalExtraPie;
 
   useEffect(() => {
     if (isModalOrNotificationOpen) {
@@ -21,13 +22,38 @@ export default function App() {
     }
   }, [isModalOrNotificationOpen]);
 
+  const contextValue = useMemo(() => ({
+    modalSelectOptions,
+    setModalSelectOptions,
+    modalCart,
+    setModalCart,
+    addItem,
+    removeItem,
+    order: items,
+    addExtraPie,
+    extraPie,
+    removeExtraPie,
+    modalExtraPie,
+    setModalExtraPie
+  }), [
+    modalSelectOptions,
+    setModalSelectOptions,
+    modalCart, setModalCart,
+    addItem,
+    removeItem,
+    items,
+    addExtraPie,
+    extraPie,
+    removeExtraPie,
+    modalExtraPie,
+    setModalExtraPie
+  ]);
+
+
   return (
-    <ControlMessageContext value={
-      {
-        notificationMessage, setNotificationMessage, modalCart, setModalCart, addItem, removerItem, order: items
-      }
-    }>
+    <ControlComponentsContext value={contextValue}>
       <ModalPedido />
+      <ModalExtraPie />
       <CardapioKitsFesta />
       <ToastContainer
         position="top-left"
@@ -43,7 +69,7 @@ export default function App() {
         transition={Bounce}
         limit={1}
       />
-    </ControlMessageContext>
+    </ControlComponentsContext >
   )
 }
 

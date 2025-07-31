@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { UUIDTypes } from "uuid";
+import type { DataPieType } from "../const/datas";
 
 export type OrderToCartType = {
   id: UUIDTypes;
@@ -15,28 +16,54 @@ export type OrderToCartType = {
   preco: string;
 }
 
+export type ExtraPieType = {
+  id: UUIDTypes;
+  dataPies: DataPieType;
+  valores: {
+    tamanho: number;
+    preco: number;
+  };
+};
+
 export function useCart() {
+
   const [items, setItems] = useState<OrderToCartType[]>(() => {
-    const storedItems = localStorage.getItem("pedidoKitFesta");
+    const storedItems = sessionStorage.getItem("pedidoKitFesta");
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
+
+  const [extraPie, setExtraPie] = useState<ExtraPieType[]>(() => {
+    const storedItems = sessionStorage.getItem("extraPie");
     return storedItems ? JSON.parse(storedItems) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("pedidoKitFesta", JSON.stringify(items));
-  }, [items]);
+    sessionStorage.setItem("pedidoKitFesta", JSON.stringify(items));
+    sessionStorage.setItem("extraPie", JSON.stringify(extraPie));
+  }, [items, extraPie]);
 
   function addItem(newItem: OrderToCartType) {
     setItems([...items, newItem]);
   }
 
-  function removerItem(idItem: UUIDTypes) {
-    const filterItems = items.filter((item) => item.id !== idItem);
-    setItems(filterItems);
+  function addExtraPie(newItem: ExtraPieType) {
+    setExtraPie([...extraPie, newItem]);
+  }
+
+  function removeItem(idItem: UUIDTypes) {
+    setItems(items.filter((item) => item.id !== idItem));
+  }
+
+  function removeExtraPie(idItem: UUIDTypes) {
+    setExtraPie(extraPie.filter((item) => item.id !== idItem));
   }
 
   return {
     items,
     addItem,
-    removerItem
+    removeItem,
+    extraPie,
+    addExtraPie,
+    removeExtraPie
   }
 }

@@ -1,25 +1,35 @@
 import { createContext } from "react";
-import type { OrderToCartType } from "../hooks/useCart";
+import type { ExtraPieType, OrderToCartType } from "../hooks/useCart";
 import type { UUIDTypes } from "uuid";
 
 type ControlMessageContextType = {
-  notificationMessage: boolean;
-  setNotificationMessage: (value: boolean) => void;
+  modalSelectOptions: boolean;
+  setModalSelectOptions: (value: boolean) => void;
   modalCart: boolean;
   setModalCart: (value: boolean) => void;
-  addItem: (newItem: OrderToCartType) => void;
-  removerItem: (id: UUIDTypes) => void;
+  modalExtraPie: boolean;
+  setModalExtraPie: (value: boolean) => void;
   order: OrderToCartType[];
+  addItem: (newItem: OrderToCartType) => void;
+  removeItem: (id: UUIDTypes) => void;
+  extraPie: ExtraPieType[];
+  addExtraPie: (newItem: ExtraPieType) => void;
+  removeExtraPie: (id: UUIDTypes) => void;
 }
 
-export const ControlMessageContext = createContext<ControlMessageContextType>(
+export const ControlComponentsContext = createContext<ControlMessageContextType>(
   {
-    notificationMessage: false,
-    setNotificationMessage: () => { },
+    modalSelectOptions: false,
+    setModalSelectOptions: () => { },
     modalCart: false,
     setModalCart: () => { },
     addItem: () => { },
-    removerItem: () => { },
+    removeItem: () => { },
     order: [],
+    extraPie: [],
+    addExtraPie: () => { },
+    removeExtraPie: () => { },
+    modalExtraPie: false,
+    setModalExtraPie: () => { },
   }
 );

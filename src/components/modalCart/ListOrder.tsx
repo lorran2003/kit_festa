@@ -5,10 +5,10 @@ import type { OrderToCartType } from "../../hooks/useCart";
 
 type ListOrderProps = {
     order: OrderToCartType[];
-    removerItem: (id: UUIDTypes) => void;
+    removeItem: (id: UUIDTypes) => void;
 }
 
-export function ListOrder({ order, removerItem }: ListOrderProps) {
+export function ListOrder({ order, removeItem }: ListOrderProps) {
     return (
         order.map((item: OrderToCartType) => (
             <div key={item.id.toString()} className="flex flex-col gap-2 justify-start items-start py-2
@@ -46,7 +46,7 @@ export function ListOrder({ order, removerItem }: ListOrderProps) {
                     type="button"
                     aria-label="Remover item do carrinho"
                     className="roudned-sm w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded shadow transition"
-                    onClick={() => removerItem(item.id)}
+                    onClick={() => removeItem(item.id)}
                 >
                     <FontAwesomeIcon icon={faTrash} color='white' size="lg" />
                 </button>

@@ -1,9 +1,9 @@
-import type { PieType } from "./ModalOptions";
+import type { DataPieType } from "../../const/datas";
 
 type SelectPieProps = {
-    selectedPie: PieType;
-    setSelectedPie: (item: PieType) => void;
-    pie: PieType[];
+    selectedPie: DataPieType;
+    setSelectedPie: (item: DataPieType) => void;
+    pie: DataPieType[];
 }
 
 export function SelectPie({ selectedPie, pie, setSelectedPie }: SelectPieProps) {

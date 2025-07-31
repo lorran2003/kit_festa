@@ -1,15 +1,17 @@
 import { faCartShopping, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { ControlMessageContext } from "../CreateContext";
+import { ControlComponentsContext } from "../CreateContext";
 import type { OrderToCartType } from "../../hooks/useCart";
-import { ExtraPie } from "../ExtraPie";
+import { ExtraPie } from "./ExtraPie";
 import { ListOrder } from "./ListOrder";
 import { submitMessageWhatsApp } from "../../func/wtt";
+import { CardExtraPie } from "./CardExtraPie";
+
 
 export function ModalPedido() {
 
-  const { modalCart, setModalCart, order, removerItem } = useContext(ControlMessageContext);
+  const { modalCart, setModalCart, order, removeItem, extraPie, removeExtraPie, setModalExtraPie } = useContext(ControlComponentsContext);
 
   const submitWpp = () => {
     setModalCart(false);
@@ -27,7 +29,7 @@ export function ModalPedido() {
   return (
     <>
       <button
-        className="fixed top-20 sm:top-5 right-6 p-3 rounded-full bg-pink-500 shadow-lg hover:bg-pink-600 transition-colors  duration-300 cursor-pointer z-50 flex justify-center items-center gap-1"
+        className="fixed top-20 sm:top-5 right-6 p-3 rounded-full bg-pink-500 shadow-lg hover:bg-pink-600 transition-colors  duration-300 cursor-pointer z-30 flex justify-center items-center gap-1"
         type="button"
         aria-label='Visualizar carrinho'
         onClick={() => setModalCart(!modalCart)}
@@ -39,22 +41,24 @@ export function ModalPedido() {
 
       </button>
 
-
       <div
         className={`fixed top-0 right-0 h-full w-full max-w-md z-40 flex justify-end transition-all duration-500 ${modalCart ? 'pointer-events-auto' : 'pointer-events-none'}`}
       >
         <div
           className={`h-full w-full max-w-md bg-white p-6 rounded-l-lg shadow-lg transform transition-transform duration-500 overflow-auto ${modalCart ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <button
-            type="button"
-            aria-label="Fechar modal"
-            onClick={() => setModalCart(false)}
-            className="bg-red-500 px-2 py-1 rounded-full shadow transition"
-          >
-            <FontAwesomeIcon icon={faX} color='white' size="lg" />
 
-          </button>
+          <div className="relative w-full">
+            <button
+              type="button"
+              aria-label="Fechar modal"
+              onClick={() => setModalCart(false)}
+              className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 px-2.5 py-1 rounded shadow transition"
+            >
+              <FontAwesomeIcon icon={faX} color='white' size="lg" />
+
+            </button>
+          </div>
 
           <h2 className="text-xl font-bold my-4 italic">Seu pedido 🥳 !!!</h2>
           {
@@ -67,7 +71,7 @@ export function ModalPedido() {
               <div className="text-gray-700">
                 <p>Items no carrinho:</p>
                 <div className="list-disc pr-5">
-                  <ListOrder order={order} removerItem={removerItem} />
+                  <ListOrder order={order} removeItem={removeItem} />
                 </div>
               </div>
             ) : (
@@ -75,7 +79,9 @@ export function ModalPedido() {
             )
           }
 
-          < ExtraPie />
+          {extraPie.length > 0 && (<CardExtraPie items={extraPie} removeItem={removeExtraPie} />)}
+
+          <ExtraPie openModal={setModalExtraPie} />
 
           <div className="grid grid-cols-2 justify-center items-center gap-2">
 
@@ -85,7 +91,7 @@ export function ModalPedido() {
               className="mt-4 bg-gray-50 hover:bg-gray-200 text-zinc-900 font-semibold py-2 px-4 rounded shadow transition w-full"
               onClick={() => setModalCart(false)}
             >
-              voltar
+              Voltar
 
             </button>
 
