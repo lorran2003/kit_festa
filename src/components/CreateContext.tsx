@@ -15,6 +15,7 @@ type ControlMessageContextType = {
   extraPie: ExtraPieType[];
   addExtraPie: (newItem: ExtraPieType) => void;
   removeExtraPie: (id: UUIDTypes) => void;
+  removeAllItemToCart: () => void;
 }
 
 export const ControlComponentsContext = createContext<ControlMessageContextType>(
@@ -31,5 +32,6 @@ export const ControlComponentsContext = createContext<ControlMessageContextType>
     removeExtraPie: () => { },
     modalExtraPie: false,
     setModalExtraPie: () => { },
+    removeAllItemToCart: () => { }
   }
 );

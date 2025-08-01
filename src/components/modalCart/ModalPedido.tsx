@@ -1,29 +1,39 @@
 import { faCartShopping, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ControlComponentsContext } from "../CreateContext";
 import type { OrderToCartType } from "../../hooks/useCart";
 import { ExtraPie } from "./ExtraPie";
 import { ListOrder } from "./ListOrder";
-import { submitMessageWhatsApp } from "../../func/wtt";
 import { CardExtraPie } from "./CardExtraPie";
+import { DialogUser } from "./DialogUser";
 
 
 export function ModalPedido() {
 
   const { modalCart, setModalCart, order, removeItem, extraPie, removeExtraPie, setModalExtraPie } = useContext(ControlComponentsContext);
 
-  const submitWpp = () => {
-    setModalCart(false);
-    submitMessageWhatsApp(order);
-  }
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const totalPrice = () => {
 
     const convertNumber = order.map((item: OrderToCartType) => Number(item.preco.replace(',', '.')));
 
-    return convertNumber.reduce((prev: number, cur: number) => prev + cur, 0).toFixed(2);
+    const totalPriceExtraPie = extraPie.length > 0 ?
+      extraPie.map(item => item.valores.preco)
+        .reduce((prev: number, cur: number) => prev + cur, 0)
+      :
+      0;
 
+    const totalPriceView = (convertNumber.reduce((prev: number, cur: number) => prev + cur, 0) + totalPriceExtraPie);
+
+    return totalPriceView;
+
+  };
+
+  const disableBtnSubmit = () => {
+    if (order.length <= 0 && extraPie.length <= 0) return true;
+    return false;
   }
 
   return (
@@ -37,7 +47,7 @@ export function ModalPedido() {
 
         <FontAwesomeIcon icon={faCartShopping} color='white' size='xl' />
 
-        <span className="text-zinc-50 text-xl">{order.length}</span>
+        <span className="text-zinc-50 text-xl">{order.length + extraPie.length}</span>
 
       </button>
 
@@ -62,19 +72,24 @@ export function ModalPedido() {
 
           <h2 className="text-xl font-bold my-4 italic">Seu pedido 🥳 !!!</h2>
           {
-            order.length > 0 && (
-              <span>Valor total: R$ {totalPrice()}</span>
+            totalPrice() > 0 && (
+              <span>Valor total: R$ {totalPrice().toFixed(2)}</span>
             )
           }
+
           {
-            order.length > 0 ? (
+            order.length > 0 && (
               <div className="text-gray-700">
                 <p>Items no carrinho:</p>
                 <div className="list-disc pr-5">
                   <ListOrder order={order} removeItem={removeItem} />
                 </div>
               </div>
-            ) : (
+            )
+          }
+
+          {
+            order.length <= 0 && extraPie.length <= 0 && (
               <p className="text-gray-700">Seu carrinho está vazio! 🫣</p>
             )
           }
@@ -98,8 +113,9 @@ export function ModalPedido() {
             <button type="button"
               typeof="button"
               aria-label="Finalizar pedido"
-              className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition w-full"
-              onClick={() => submitWpp()}
+              className={`mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded shadow transition w-full ${disableBtnSubmit() ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={disableBtnSubmit()}
+              onClick={() => setOpenModal(true)}
             >
               Finalizar Pedido
 
@@ -107,6 +123,7 @@ export function ModalPedido() {
           </div>
         </div >
       </div >
+      <DialogUser extraPie={extraPie} openModal={openModal} setOpenModal={setOpenModal} order={order} />
     </>
   )
 }

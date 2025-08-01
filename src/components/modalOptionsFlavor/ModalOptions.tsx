@@ -54,7 +54,7 @@ export function ModalOptions({ order }: { order: kitsType }) {
       setModalCart(true);
       setDocinho([]);
       setSalgado([]);
-      success("Item adicionado ao carrinho😍");
+      success("Pedido adicionado ao carrinho😍");
 
     } catch (error) {
       console.log("erro ao adicionar item ao carrinho", error);
@@ -75,7 +75,7 @@ export function ModalOptions({ order }: { order: kitsType }) {
               setDocinho([]);
               setSalgado([]);
             }}
-            className="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold py-1 px-3 rounded shadow transition sm:py-2 sm:px-4"
+            className="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold py-1 px-3 rounded shadow transition sm:py-2 sm:px-4 z-50"
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
@@ -86,6 +86,10 @@ export function ModalOptions({ order }: { order: kitsType }) {
           <h2 className="text-2xl font-bold text-pink-600">
             Monte o seu pedido!🤩
           </h2>
+
+          <h3 className="text-xl italic text-gray-500">
+            {order.nome} : {order.pessoas}
+          </h3>
 
           <div className="lg:grid lg:grid-cols-2 w-full">
             <SelectPie selectedPie={selectedPie} pie={pies.dataPies} setSelectedPie={setSelectedPie} />

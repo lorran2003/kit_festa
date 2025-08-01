@@ -41,7 +41,7 @@ export function CardExtraPie({ items, removeItem }: CardsExtraPieProps) {
                                             {item.valores.tamanho}cm
                                         </td>
                                         <td>
-                                            R$ {item.valores.preco}
+                                            R${item.valores.preco}
                                         </td>
                                     </tr>
                                 </tbody>

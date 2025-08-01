@@ -58,12 +58,18 @@ export function useCart() {
     setExtraPie(extraPie.filter((item) => item.id !== idItem));
   }
 
+  function removeAllItemToCart() {
+    setItems([]);
+    setExtraPie([]);
+  }
+
   return {
     items,
     addItem,
     removeItem,
     extraPie,
     addExtraPie,
-    removeExtraPie
+    removeExtraPie,
+    removeAllItemToCart
   }
 }

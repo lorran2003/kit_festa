@@ -24,7 +24,6 @@ export function ModalExtraPie() {
     const { error, success } = notify();
 
     const closeModal = () => {
-        console.log('executado')
         setModalExtraPie(false);
         setSelectedPie({ pie: pies.dataPies[0], valores: pies.valores[0] });
     }
@@ -62,7 +61,7 @@ export function ModalExtraPie() {
                         type="button"
                         aria-label="Fechar modal"
                         onClick={() => closeModal()}
-                        className="absolute size-9 lg:size-11 right-0 top-0 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold rounded shadow transition cursor-pointer"
+                        className="absolute size-9 lg:size-11 right-0 top-0 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold rounded shadow transition cursor-pointer z-50"
                     >
                         <FontAwesomeIcon icon={faXmark} className="text-lg" />
                     </button>

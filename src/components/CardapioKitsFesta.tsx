@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ControlComponentsContext } from "./CreateContext";
-import { ModalOptions } from "./modalSelectFlavor/ModalOptions";
+import { ModalOptions } from "./modalOptionsFlavor/ModalOptions";
 import { kits, type kitsType } from "../const/datas";
 
 export function CardapioKitsFesta() {
