@@ -78,6 +78,9 @@ export function DialogUser({ openModal, order, setOpenModal, extraPie }: DialogU
                             </Select.Content>
                         </Select.Root>
                     </div>
+                    {getPayment === payment[2] && (
+                        <h3 className="italic text-zinc-600">Parcelas em até 2x</h3>
+                    )}
                 </div>
 
                 <div className="grid grid-cols-2 justify-center item-center gap-4">

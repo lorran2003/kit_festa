@@ -1,23 +1,25 @@
 import { useContext, useState } from "react";
 import { ControlComponentsContext } from "./CreateContext";
 import { ModalOptions } from "./modalOptionsFlavor/ModalOptions";
-import { kits, type kitsType } from "../const/datas";
+import { kits, type KitsType } from "../const/datas";
 
 export function CardapioKitsFesta() {
 
-  const [order, setOrder] = useState<kitsType>({
+  const [order, setOrder] = useState<KitsType>({
+    id: "",
     nome: "",
     pessoas: "",
     salgados: 0,
     docinhos: 0,
     tamanhoTorta: 0,
     preco: "",
-    destaque: ""
+    destaque: "",
+    favorite: false
   });
 
-  const handleAddItem = (kit: kitsType) => {
-    setModalSelectOptions(true);
+  const handleAddItem = (kit: KitsType) => {
     setOrder(kit);
+    setModalSelectOptions(true);
   };
 
   const { setModalSelectOptions } = useContext(ControlComponentsContext);
@@ -30,14 +32,14 @@ export function CardapioKitsFesta() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {kits.map((kit) => (
-          <div key={kit.nome} className="rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-pink-200">
+          <div key={kit.id.toString()} className="rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-pink-200">
             <div className="p-6">
               <div className="flex items-center justify-between mb-2">
                 <h2 className="text-xl font-bold text-pink-700">{kit.nome}</h2>
-                <div className={`text-lg text-zinc-50 shadow bg-green-500 rounded p-1 ${kit.destaque === "Mais pedido!" ? "animate-bounce" : ""}`}>{kit.destaque}</div>
+                <div className={`text-lg text-zinc-50 shadow bg-green-500 rounded p-1 ${kit.favorite ? "animate-bounce" : ""}`}>{kit.destaque}</div>
               </div>
-              <p className="text-sm text-gray-600 mb-3">Ideal para <strong>{kit.pessoas}</strong></p>
-              <ul className="text-sm text-gray-700 space-y-1 mb-4">
+              <p className="text-lg text-gray-600 mb-3">Ideal para <strong>{kit.pessoas}</strong></p>
+              <ul className="text-lg text-gray-700 space-y-1 mb-4">
                 <li>🥟 {kit.salgados} salgadinhos (16g)</li>
                 <li>🍬 {kit.docinhos} docinhos</li>
                 <li>🍰 Torta de {kit.tamanhoTorta}cm</li>

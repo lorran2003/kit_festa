@@ -1,9 +1,9 @@
-import type { DataPieType } from "../../const/datas";
+import type { DataPie } from "../../const/datas";
 
 type SelectPieProps = {
-    selectedPie: DataPieType;
-    setSelectedPie: (item: DataPieType) => void;
-    pie: DataPieType[];
+    selectedPie: DataPie;
+    setSelectedPie: (item: DataPie) => void;
+    pie: DataPie[];
 }
 
 export function SelectPie({ selectedPie, pie, setSelectedPie }: SelectPieProps) {

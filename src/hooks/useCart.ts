@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { UUIDTypes } from "uuid";
-import type { DataPieType } from "../const/datas";
+import type { DataPie, ValuesPies } from "../const/datas";
 
 export type OrderToCartType = {
   id: UUIDTypes;
@@ -18,11 +18,8 @@ export type OrderToCartType = {
 
 export type ExtraPieType = {
   id: UUIDTypes;
-  dataPies: DataPieType;
-  valores: {
-    tamanho: number;
-    preco: number;
-  };
+  dataPies: DataPie;
+  valores: ValuesPies;
 };
 
 export function useCart() {

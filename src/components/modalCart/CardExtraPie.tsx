@@ -8,6 +8,7 @@ type CardsExtraPieProps = {
     removeItem: (value: UUIDTypes) => void;
 }
 
+
 export function CardExtraPie({ items, removeItem }: CardsExtraPieProps) {
     return (
         <section>
@@ -41,7 +42,7 @@ export function CardExtraPie({ items, removeItem }: CardsExtraPieProps) {
                                             {item.valores.tamanho}cm
                                         </td>
                                         <td>
-                                            R${item.valores.preco}
+                                            R${item.valores.preco.toFixed(2)}
                                         </td>
                                     </tr>
                                 </tbody>

@@ -1,17 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ControlComponentsContext } from "../CreateContext";
 import type { OrderToCartType } from "../../hooks/useCart";
 import { SelectPie } from "./SelectPie";
-import { SelectItems, type ItemSelecionadoType} from "./SelectItems";
+import { SelectItems, type ItemSelecionadoType } from "./SelectItems";
 import { v4 as uuidv4 } from "uuid";
 import { notify } from "../../func/notify";
-import { docinhos, pies, salgados, type DataPieType, type kitsType } from "../../const/datas";
+import { docinhos, kits, salgados, type KitsType, optionsPies, type DataPie } from "../../const/datas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-export function ModalOptions({ order }: { order: kitsType }) {
+export function ModalOptions({ order }: { order: KitsType }) {
 
-  const [selectedPie, setSelectedPie] = useState<DataPieType>(pies.dataPies[0]);
+  const checkOrderOptionPie = () => order.id === kits[0].id ? optionsPies.candy.pies : optionsPies.normal.pies;
+
+  const [selectedPie, setSelectedPie] = useState<DataPie>(optionsPies.normal.pies[0]);
+
+  useEffect(() => {
+    const newPie = order.id === kits[0].id ? optionsPies.candy.pies[0] : optionsPies.normal.pies[0];
+    setSelectedPie(newPie);
+  }, [order]);
 
   const [salgado, setSalgado] = useState<ItemSelecionadoType[]>([]);
 
@@ -64,7 +71,7 @@ export function ModalOptions({ order }: { order: kitsType }) {
   return (
     <div className={`fixed bg-zinc-900/5 backdrop-blur-sm top-0 left-0 w-full h-full flex items-center justify-center z-50 transition-all duration-300 ${notificationMessage ? 'opacity-100 z-50 pointer-events-auto' : ' opacity-0 -z-50 pointer-events-none'} `}>
 
-      <div className="bg-gray-50 rounded-lg shadow-lg flex flex-col justify-start items-center gap-4 w-11/12 h-11/12 overflow-auto">
+      <div className="bg-gray-50 rounded-lg shadow-lg flex flex-col justify-start items-center gap-4 w-11/12 h-11/12 lg:h-auto overflow-auto">
 
         <div className="relative w-full">
           <button
@@ -92,7 +99,8 @@ export function ModalOptions({ order }: { order: kitsType }) {
           </h3>
 
           <div className="lg:grid lg:grid-cols-2 w-full">
-            <SelectPie selectedPie={selectedPie} pie={pies.dataPies} setSelectedPie={setSelectedPie} />
+
+            <SelectPie selectedPie={selectedPie} pie={checkOrderOptionPie()} setSelectedPie={setSelectedPie} />
 
             <div className="flex flex-col gap-4 lg:max-h-[28rem] lg:overflow-auto lg:w-full">
 
