@@ -70,37 +70,37 @@ export const optionsPies: PieType = {
             {
                 image: maracujaCandy,
                 name: "Maracujá c/chocolate",
-                description: "Bolo de chocolate recheado e coberto com creme de maracujá."
+                description: ""
             },
             {
                 image: limaoCandy,
                 name: "Limão c/chocolate",
-                description: "Bolo de chocolate recheado e coberto com creme de limão."
+                description: ""
             },
             {
                 image: negrescoCandy,
                 name: "Negresco c/chocolate",
-                description: "Bolo de chocolate recheado e coberto com creme de negresco."
+                description: ""
             },
             {
                 image: boloFestaCandy,
                 name: "Bolo festa c/chocolate",
-                description: "Bolo de baunilha recheado com doce de leite e ameixa, coberto com chantilly, coco ralado e um toque de doce de leite."
+                description: ""
             },
             {
                 image: kinderOvoCandy,
                 name: "Kinder Ovo c/chocolate",
-                description: "Bolo de chocolate recheado com doce de leite e ameixa, coberto com chantilly, coco ralado e um toque de doce de leite."
+                description: ""
             },
             {
                 image: florestaNegraCandy,
                 name: "Floresta Negra",
-                description: "Bolo de chocolate recheado com brigadeiro, coberto com chocolate cremoso e finalizado com granulado."
+                description: ""
             },
             {
                 image: mousseChocolateCandy,
                 name: "Mousse c/chocolate",
-                description: "Bolo de chocolate recheado e coberto com creme de maracujá."
+                description: ""
             }
         ],
         valores: [
