@@ -6,6 +6,8 @@ import { useCart } from './hooks/useCart';
 import { Bounce, ToastContainer } from 'react-toastify';
 import { ModalExtraPie } from './components/ModalExtraPie';
 import { Theme } from "@radix-ui/themes";
+import { Header } from './components/Header';
+import { Carousel } from './components/Carousel';
 
 export default function App() {
   const [modalSelectOptions, setModalSelectOptions] = useState<boolean>(false);
@@ -55,6 +57,8 @@ export default function App() {
   return (
     <Theme>
       <ControlComponentsContext value={contextValue}>
+        <Header />
+        <Carousel />
         <ModalPedido />
         <ModalExtraPie />
         <CardapioKitsFesta />

@@ -13,7 +13,7 @@ export function ModalOptions({ order }: { order: KitsType }) {
 
   const checkOrderOptionPie = () => order.id === kits[0].id ? optionsPies.candy.pies : optionsPies.normal.pies;
 
-  const [selectedPie, setSelectedPie] = useState<DataPie>(optionsPies.normal.pies[0]);
+  const [selectedPie, setSelectedPie] = useState<DataPie>(checkOrderOptionPie()[0]);
 
   useEffect(() => {
     const newPie = order.id === kits[0].id ? optionsPies.candy.pies[0] : optionsPies.normal.pies[0];
@@ -64,7 +64,7 @@ export function ModalOptions({ order }: { order: KitsType }) {
       success("Pedido adicionado ao carrinho😍");
 
     } catch (error) {
-      console.log("erro ao adicionar item ao carrinho", error);
+      console.error("erro ao adicionar item ao carrinho", error);
     }
   }
 

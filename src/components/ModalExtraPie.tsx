@@ -29,7 +29,6 @@ export function ModalExtraPie() {
     const [optionPie, setOptionPie] = useState<ConstPiesType>(pieNormal);
 
     const [selectedPie, setSelectedPie] = useState<PieUseStateType>({ pie: optionPie.pies[0], valores: optionPie.valores[0] });
-    console.log(selectedPie)
 
     const { error, success } = notify();
 
@@ -56,7 +55,7 @@ export function ModalExtraPie() {
             success("Torta adicionada com sucesso!🤤");
 
         } catch (error) {
-            console.log("Erro ao adicionar torta", error);
+            console.error("Erro ao adicionar torta", error);
         }
 
     }
