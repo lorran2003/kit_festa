@@ -10,8 +10,6 @@ import maracuja from "../assets/image/bolos/maracuja.png";
 import maracujaCandy from "../assets/image/bolos/maracujaChocolateCandy.png";
 import limaoCandy from "../assets/image/bolos/limaoCandy.png";
 import negrescoCandy from "../assets/image/bolos/negrescoCandy.png";
-import boloFestaCandy from "../assets/image/bolos/boloFestaCandy.png";
-import kinderOvoCandy from "../assets/image/bolos/kinderOvoCandy.png";
 import florestaNegraCandy from "../assets/image/bolos/florestaNegraCandy.png";
 import mousseChocolateCandy from "../assets/image/bolos/mousseChocolateCandy.png";
 import beijinho from "../assets/image/docinhos/beijinho.jpg";
@@ -80,16 +78,6 @@ export const optionsPies: PieType = {
             {
                 image: negrescoCandy,
                 name: "Negresco c/chocolate",
-                description: ""
-            },
-            {
-                image: boloFestaCandy,
-                name: "Bolo festa c/chocolate",
-                description: ""
-            },
-            {
-                image: kinderOvoCandy,
-                name: "Kinder Ovo c/chocolate",
                 description: ""
             },
             {

@@ -22,17 +22,25 @@ export type ExtraPieType = {
   valores: ValuesPies;
 };
 
+function safeGet<T>(key: string, defaultValue: T): T {
+  try {
+    const stored = sessionStorage.getItem(key);
+    return stored ? JSON.parse(stored) as T : defaultValue;
+  } catch {
+    sessionStorage.removeItem(key);
+    return defaultValue;
+  }
+}
+
 export function useCart() {
 
-  const [items, setItems] = useState<OrderToCartType[]>(() => {
-    const storedItems = sessionStorage.getItem("pedidoKitFesta");
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
+  const [items, setItems] = useState<OrderToCartType[]>(() =>
+    safeGet<OrderToCartType[]>("pedidoKitFesta", [])
+  );
 
-  const [extraPie, setExtraPie] = useState<ExtraPieType[]>(() => {
-    const storedItems = sessionStorage.getItem("extraPie");
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
+  const [extraPie, setExtraPie] = useState<ExtraPieType[]>(() =>
+    safeGet<ExtraPieType[]>("extraPie", [])
+  );
 
   useEffect(() => {
     sessionStorage.setItem("pedidoKitFesta", JSON.stringify(items));
