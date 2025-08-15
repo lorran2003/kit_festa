@@ -7,29 +7,26 @@ import { v4 as uuidv4 } from "uuid";
 import { notify } from "../../func/notify";
 import { docinhos, kits, salgados, type KitsType, optionsPies, type DataPie } from "../../const/datas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faCake, faUtensils, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export function ModalOptions({ order }: { order: KitsType }) {
 
   const checkOrderOptionPie = () => order.id === kits[0].id ? optionsPies.candy.pies : optionsPies.normal.pies;
 
   const [selectedPie, setSelectedPie] = useState<DataPie>(checkOrderOptionPie()[0]);
+  const [salgado, setSalgado] = useState<ItemSelecionadoType[]>([]);
+  const [docinho, setDocinho] = useState<ItemSelecionadoType[]>([]);
 
   useEffect(() => {
     const newPie = order.id === kits[0].id ? optionsPies.candy.pies[0] : optionsPies.normal.pies[0];
     setSelectedPie(newPie);
   }, [order]);
 
-  const [salgado, setSalgado] = useState<ItemSelecionadoType[]>([]);
-
-  const [docinho, setDocinho] = useState<ItemSelecionadoType[]>([]);
-
   const { modalSelectOptions: notificationMessage, setModalSelectOptions: setNotificationMessage, setModalCart, addItem } = useContext(ControlComponentsContext);
 
   const { success, error } = notify();
 
   const submitCart = () => {
-
     const verifyDatas = {
       salg: salgado.map(item => item.sabor),
       doc: docinho.map(item => item.sabor),
@@ -41,7 +38,6 @@ export function ModalOptions({ order }: { order: KitsType }) {
     if (verifyDatas.doc.some((item) => item === "" || item === " ") || verifyDatas.doc.length <= 0) return error("Ops... Esta faltando o docinho😱");
 
     try {
-
       const newOrder: OrderToCartType = {
         id: uuidv4(),
         salgados: salgado,
@@ -68,70 +64,106 @@ export function ModalOptions({ order }: { order: KitsType }) {
     }
   }
 
+  const handleClose = () => {
+    setNotificationMessage(false);
+    setDocinho([]);
+    setSalgado([]);
+  };
+
   return (
-    <div className={`fixed bg-zinc-900/5 backdrop-blur-sm top-0 left-0 w-full h-full flex items-center justify-center z-50 transition-all duration-300 ${notificationMessage ? 'opacity-100 z-50 pointer-events-auto' : ' opacity-0 -z-50 pointer-events-none'} `}>
+    <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300 ${notificationMessage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
 
-      <div className="bg-gray-50 rounded-lg shadow-lg flex flex-col justify-start items-center gap-4 w-11/12 h-11/12 lg:h-auto overflow-auto">
-
-        <div className="relative w-full">
+      <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-11/12 h-11/12 animate-bounce-in  overflow-y-auto lg:overflow-hidden">
+        
+        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6 relative">
           <button
             type="button"
-            aria-label="Fechar alerta"
-            onClick={() => {
-              setNotificationMessage(false)
-              setDocinho([]);
-              setSalgado([]);
-            }}
-            className="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-zinc-50 font-semibold py-1 px-3 rounded shadow transition sm:py-2 sm:px-4 z-50"
+            aria-label="Fechar modal"
+            onClick={handleClose}
+            className="absolute top-0 right-0 bg-white/20 hover:bg-white/30 p-2 rounded-l-md transition-all duration-300 hover:scale-110"
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
+
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-2">Monte o seu pedido!</h2>
+            <p className="text-pink-100 text-lg">
+              {order.nome} • {order.pessoas}
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col items-center lg:justify-center gap-4 h-full w-full p-3 mt-2">
+        {/* Content */}
+        <div className="p-2 h-screen">
+          <div className="grid lg:grid-cols-2 gap-8">
 
-          <h2 className="text-2xl font-bold text-pink-600">
-            Monte o seu pedido!🤩
-          </h2>
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-700 rounded-full font-semibold mb-4">
+                  <FontAwesomeIcon icon={faCake} />
+                  Escolha sua Torta
+                </div>
+              </div>
 
-          <h3 className="text-xl italic text-gray-500">
-            {order.nome} : {order.pessoas}
-          </h3>
+              <SelectPie
+                selectedPie={selectedPie}
+                pie={checkOrderOptionPie()}
+                setSelectedPie={setSelectedPie}
+              />
+            </div>
 
-          <div className="lg:grid lg:grid-cols-2 w-full">
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full font-semibold mb-4">
+                  <FontAwesomeIcon icon={faUtensils} />
+                  Personalize seu Kit
+                </div>
+              </div>
 
-            <SelectPie selectedPie={selectedPie} pie={checkOrderOptionPie()} setSelectedPie={setSelectedPie} />
+              <div className="space-y-6 lg:overflow-y-auto lg:h-screen">
+                <SelectItems
+                  nameItem="Salgadinhos 🥟"
+                  itemList={salgados}
+                  selectedItems={salgado}
+                  setSelectedItems={setSalgado}
+                  max={3}
+                  mixName="misto"
+                />
 
-            <div className="flex flex-col gap-4 lg:max-h-[28rem] lg:overflow-auto lg:w-full">
-
-              <SelectItems nameItem="Salgadinhos🥟" itemList={salgados} selectedItems={salgado} setSelectedItems={setSalgado} max={3} mixName="misto" />
-
-              <SelectItems nameItem="Docinhos🍬" itemList={docinhos} selectedItems={docinho} setSelectedItems={setDocinho} max={3} mixName="misto" />
+                <SelectItems
+                  nameItem="Docinhos 🍬"
+                  itemList={docinhos}
+                  selectedItems={docinho}
+                  setSelectedItems={setDocinho}
+                  max={3}
+                  mixName="misto"
+                />
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 justify-start items-start gap-2 w-full bg-zinc-50 pb-3">
-
+        <div className="border-t border-gray-100 p-6 bg-gray-50">
+          <div className="flex gap-4">
             <button
               type="button"
-              aria-label="Fechar alerta"
-              onClick={() => {
-                setNotificationMessage(false)
-                setDocinho([]);
-                setSalgado([]);
-              }}
-              className="bg-gray-50 hover:bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded shadow transition"
+              aria-label="Cancelar pedido"
+              onClick={handleClose}
+              className="flex-1 px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105"
             >
-              Voltar
+              Cancelar
             </button>
 
             <button
               type="button"
-              aria-label="Fechar alerta"
-              onClick={() => submitCart()}
-              className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded shadow transition"
+              aria-label="Confirmar pedido"
+              onClick={submitCart}
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
-              Confirmar
+              <span className="flex items-center justify-center">
+                <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                Confirmar 
+              </span>
             </button>
           </div>
         </div>

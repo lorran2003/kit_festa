@@ -29,8 +29,11 @@ export function SelectPie({ selectedPie, pie, setSelectedPie }: SelectPieProps) 
                         ))
                     }
                 </div>
-
-                <p className="text-zinc-800 text-lg text-justify lg:text-center lg:text-2xl p-1.5 rounded font-sans w-full">{selectedPie.description}</p>
+                {
+                    selectedPie.description.length > 0 && (
+                        <p className="text-zinc-800 text-lg text-justify lg:text-center lg:text-2xl p-1.5 rounded font-sans w-full">{selectedPie.description}</p>
+                    )
+                }
             </div>
         </div>
     )
