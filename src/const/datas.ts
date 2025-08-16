@@ -204,7 +204,8 @@ export const kits: KitsType[] = [
         docinhos: 45,
         tamanhoTorta: 20,
         preco: "170,00",
-        destaque: "Mais pedido!",
+        destaque: "Pequenas festas!",
+
         favorite: true,
     },
     {
@@ -215,7 +216,7 @@ export const kits: KitsType[] = [
         docinhos: 75,
         tamanhoTorta: 25,
         preco: "240,00",
-        destaque: "Equilíbrio perfeito",
+        destaque: "Equilíbrio perfeito!",
         favorite: false,
     },
     {
@@ -226,7 +227,7 @@ export const kits: KitsType[] = [
         docinhos: 105,
         tamanhoTorta: 30,
         preco: "320,00",
-        destaque: "Para grandes festas",
+        destaque: "Para grandes festas!",
         favorite: false,
     },
 ];

@@ -47,9 +47,10 @@ export function DialogUser({ openModal, order, setOpenModal, extraPie }: DialogU
 
     return (
         <Dialog.Root open={openModal} onOpenChange={setOpenModal}>
-            <Dialog.Content className="flex flex-col gap-4">
-                <Dialog.Title className="text-xl">
-                    Estamos finalizando seu pedido!🎉
+            <Dialog.Content className="flex flex-col gap-4 text-center">
+                <Dialog.Title className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                    finalizando seu pedido!
+                    <span className="text-zinc-50 text-2xl">🎉</span> 
                 </Dialog.Title>
                 <div>
                     <label htmlFor="User">
@@ -57,14 +58,14 @@ export function DialogUser({ openModal, order, setOpenModal, extraPie }: DialogU
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="border bg-gray-100 w-full px-3 py-2 rounded mb-4 outline-none focus:ring-1 focus:ring-pink-600 shadow border-none caret-zinc-950"
-                            placeholder="Seu nome"
+                            className="border bg-gray-50 w-full px-3 py-2 rounded-xl mb-4 outline-none focus:ring-1 focus:ring-pink-600 shadow border-none caret-zinc-950"
+                            placeholder="Digite seu nome"
                         />
                     </label>
 
                     <div className="flex gap-2 justify-start items-center">
                         <h3 className="italic text-zinc-700">Formas de pagamento: </h3>
-                        <Select.Root onValueChange={setPayment} defaultValue={getPayment}  >
+                        <Select.Root onValueChange={setPayment} defaultValue={getPayment} >
                             <Select.Trigger color="pink" />
                             <Select.Content color="pink">
                                 <Select.Group>
@@ -83,12 +84,12 @@ export function DialogUser({ openModal, order, setOpenModal, extraPie }: DialogU
                     )}
                 </div>
 
-                <div className="grid grid-cols-2 justify-center item-center gap-4">
+                <div className="grid grid-cols-2 justify-center item-center gap-4 font-semibold">
                     <button
                         type="button"
                         aria-label="Cancelar pedido"
                         onClick={() => setOpenModal(false)}
-                        className="bg-gray-50 hover:bg-gray-200 text-zinc-900 font-semibold py-2 px-3 rounded shadow transition w-full"
+                        className="bg-gray-50 hover:bg-gray-200 text-zinc-900 py-2 px-3 rounded-xl shadow transition w-full hover:scale-105"
                     >
                         Voltar
                     </button>
@@ -97,7 +98,7 @@ export function DialogUser({ openModal, order, setOpenModal, extraPie }: DialogU
                         type="button"
                         aria-label="Confirmar pedido"
                         onClick={() => confirm()}
-                        className="bg-pink-600 text-white hover:bg-pink-700 font-semibold py-2 px-3 rounded shadow transition w-full"
+                        className="bg-gradient-to-r from-pink-600 to-purple-600 text-zinc-50 py-2 px-3 rounded-xl shadow transition w-full hover:scale-105"
                     >
                         Enviar pedido
                     </button>

@@ -22,15 +22,18 @@ export function SelectPie({ selectedPie, pie, setSelectedPie }: SelectPieProps) 
                                 type="button"
                                 aria-label={`Torta ${item.name}`}
                                 onClick={() => setSelectedPie(item)}
-                                className={`font-semibold px-1 sm:py-2 sm:text-lg rounded ${selectedPie.name === item.name ? 'bg-pink-500 text-white' : 'bg-zinc-50 text-gray-800 shadow'} transition-colors duration-300 m-1`}
+                                className={`font-semibold px-1 py-0.5 rounded ${selectedPie.name === item.name ? 'bg-pink-500 text-white' : 'bg-zinc-50 text-gray-800 shadow'} transition-colors duration-300 m-1`}
                             >
                                 {item.name}
                             </button>
                         ))
                     }
                 </div>
-
-                <p className="text-zinc-800 text-lg text-justify lg:text-center lg:text-2xl p-1.5 rounded font-sans w-full">{selectedPie.description}</p>
+                {
+                    selectedPie.description.length > 0 && (
+                        <p className="text-zinc-800 text-lg text-justify lg:text-center lg:text-xl p-1.5 rounded font-sans w-full">{selectedPie.description}</p>
+                    )
+                }
             </div>
         </div>
     )
