@@ -35,7 +35,7 @@ function safeGet<T>(key: string, defaultValue: T): T {
 export function useCart() {
 
   const [items, setItems] = useState<OrderToCartType[]>(() =>
-    safeGet<OrderToCartType[]>("pedidoKitFesta", [])
+    safeGet<OrderToCartType[]>("order", [])
   );
 
   const [extraPie, setExtraPie] = useState<ExtraPieType[]>(() =>
@@ -43,7 +43,7 @@ export function useCart() {
   );
 
   useEffect(() => {
-    sessionStorage.setItem("pedidoKitFesta", JSON.stringify(items));
+    sessionStorage.setItem("order", JSON.stringify(items));
     sessionStorage.setItem("extraPie", JSON.stringify(extraPie));
   }, [items, extraPie]);
 
