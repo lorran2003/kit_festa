@@ -15,7 +15,6 @@ export function ListOrder({ order, removeItem }: ListOrderProps) {
                 key={item.id.toString()} 
                 className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 group animate-fade-in-up"
             >
-                {/* Header */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                         <div className="p-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full">
@@ -33,17 +32,16 @@ export function ListOrder({ order, removeItem }: ListOrderProps) {
                     <button
                         type="button"
                         aria-label="Remover item do carrinho"
-                        className="p-2 bg-red-100 hover:bg-red-200 text-red-600 rounded-full transition-all duration-300 hover:scale-110 group-hover:bg-red-200"
+                        className="py-2 px-3 bg-red-100 hover:bg-red-200 text-red-600 rounded-2xl transition-all duration-300 hover:scale-110 group-hover:bg-red-200"
                         onClick={() => removeItem(item.id)}
                     >
                         <FontAwesomeIcon icon={faTrash} size='sm' />
                     </button>
                 </div>
 
-                {/* Content */}
                 <div className="space-y-4">
-                    {/* Salgadinhos */}
-                    <div className="bg-pink-50 rounded-xl p-4">
+
+                    <div className="bg-pink-50 rounded-xl p-4 shadow">
                         <div className="flex items-center gap-2 mb-2">
                             <FontAwesomeIcon icon={faUtensils} className="text-pink-600" />
                             <h4 className="font-semibold text-gray-800">Salgadinhos (16g)</h4>
@@ -60,8 +58,7 @@ export function ListOrder({ order, removeItem }: ListOrderProps) {
                         </div>
                     </div>
 
-                    {/* Docinhos */}
-                    <div className="bg-purple-50 rounded-xl p-4">
+                    <div className="bg-purple-50 rounded-xl p-4 shadow">
                         <div className="flex items-center gap-2 mb-2">
                             <FontAwesomeIcon icon={faCandyCane} className="text-purple-600" />
                             <h4 className="font-semibold text-gray-800">Docinhos</h4>
@@ -78,8 +75,7 @@ export function ListOrder({ order, removeItem }: ListOrderProps) {
                         </div>
                     </div>
 
-                    {/* Torta */}
-                    <div className="bg-yellow-50 rounded-xl p-4">
+                    <div className="bg-yellow-50 rounded-xl p-4 shadow">
                         <div className="flex items-center gap-2 mb-2">
                             <span className="text-2xl">🍰</span>
                             <h4 className="font-semibold text-gray-800">Torta</h4>

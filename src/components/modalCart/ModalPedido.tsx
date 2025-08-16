@@ -31,28 +31,25 @@ export function ModalPedido() {
 
   return (
     <>
-      {/* Modal Overlay */}
       < div
         className={`fixed top-0 right-0 h-full w-full z-50 flex justify-end transition-all duration-500 ${modalCart ? 'pointer-events-auto' : 'pointer-events-none'}`
         }
       >
-        {/* Backdrop */}
         < div
           className={`absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-500 ${modalCart ? 'opacity-100' : 'opacity-0'}`}
           onClick={() => setModalCart(false)}
         />
-
-        {/* Modal Content */}
         <div
-          className={`h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-500 overflow-hidden ${modalCart ? 'translate-x-0' : 'translate-x-full'}`}
+          id="modal-pedido"
+
+          className={`h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-500 overflow-auto ${modalCart ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          {/* Header */}
           <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6 relative">
             <button
               type="button"
               aria-label="Fechar modal"
               onClick={() => setModalCart(false)}
-              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 p-2 rounded-full transition-all duration-300 hover:scale-110"
+              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 py-2 px-3 rounded-2xl transition-all duration-300 hover:scale-110"
             >
               <FontAwesomeIcon icon={faX} color='white' size="lg" />
             </button>
@@ -82,13 +79,14 @@ export function ModalPedido() {
               </div>
             )}
 
-            {/* Empty State */}
             {order.length <= 0 && extraPie.length <= 0 && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🛒</div>
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">Carrinho Vazio</h3>
                 <p className="text-gray-500 mb-6">Adicione alguns itens deliciosos ao seu pedido!</p>
                 <button
+                  type="button"
+                  aria-label="Voltar ao cardápio"
                   onClick={() => setModalCart(false)}
                   className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
                 >
@@ -110,7 +108,6 @@ export function ModalPedido() {
               </div>
             )}
 
-            {/* Extra Pies */}
             {extraPie.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -121,11 +118,9 @@ export function ModalPedido() {
               </div>
             )}
 
-            {/* Add Extra Pie Button */}
             <ExtraPie openModal={setModalExtraPie} />
           </div>
 
-          {/* Footer Actions */}
           <div className="border-t border-gray-100 p-6 bg-gray-50">
             <div className="grid grid-cols-2 gap-3">
               <button

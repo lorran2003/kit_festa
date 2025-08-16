@@ -73,14 +73,14 @@ export function ModalOptions({ order }: { order: KitsType }) {
   return (
     <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300 ${notificationMessage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
 
-      <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-11/12 h-11/12 animate-bounce-in  overflow-y-auto lg:overflow-hidden">
-        
-        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6 relative">
+      <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-11/12 h-11/12 lg:h-[95%] animate-bounce-in overflow-y-auto lg:overflow-hidden">
+
+        <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-1 relative">
           <button
             type="button"
             aria-label="Fechar modal"
             onClick={handleClose}
-            className="absolute top-0 right-0 bg-white/20 hover:bg-white/30 p-2 rounded-l-md transition-all duration-300 hover:scale-110"
+            className="absolute w-8 h-8 bottom-2 right-2 sm:top-0 sm:right-0 bg-white/20 hover:bg-white/30 sm:p-5 flex justify-center items-center backdrop-blur-lg rounded-md sm:rounded-l-md transition-all duration-300 hover:scale-110"
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
@@ -94,10 +94,11 @@ export function ModalOptions({ order }: { order: KitsType }) {
         </div>
 
         {/* Content */}
-        <div className="p-2 h-screen">
+        <div className="p-2 h-auto">
+          
           <div className="grid lg:grid-cols-2 gap-8">
 
-            <div className="space-y-6">
+            <div className="space-y-0.5">
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-700 rounded-full font-semibold mb-4">
                   <FontAwesomeIcon icon={faCake} />
@@ -112,15 +113,16 @@ export function ModalOptions({ order }: { order: KitsType }) {
               />
             </div>
 
-            <div className="space-y-6">
+            <div className="flex flex-col gap-4">
+
               <div className="text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full font-semibold">
                   <FontAwesomeIcon icon={faUtensils} />
                   Personalize seu Kit
                 </div>
               </div>
 
-              <div className="space-y-6 lg:overflow-y-auto lg:h-screen">
+              <div className="space-y-6 lg:overflow-y-auto lg:h-[420px]">
                 <SelectItems
                   nameItem="Salgadinhos 🥟"
                   itemList={salgados}
@@ -141,30 +143,29 @@ export function ModalOptions({ order }: { order: KitsType }) {
               </div>
             </div>
           </div>
-        </div>
+          <div className="border-t border-gray-100 p-2">
+            <div className="flex gap-4">
+              <button
+                type="button"
+                aria-label="Cancelar pedido"
+                onClick={handleClose}
+                className="flex-1 px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105"
+              >
+                Cancelar
+              </button>
 
-        <div className="border-t border-gray-100 p-6 bg-gray-50">
-          <div className="flex gap-4">
-            <button
-              type="button"
-              aria-label="Cancelar pedido"
-              onClick={handleClose}
-              className="flex-1 px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105"
-            >
-              Cancelar
-            </button>
-
-            <button
-              type="button"
-              aria-label="Confirmar pedido"
-              onClick={submitCart}
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              <span className="flex items-center justify-center">
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                Confirmar 
-              </span>
-            </button>
+              <button
+                type="button"
+                aria-label="Confirmar pedido"
+                onClick={submitCart}
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <span className="flex items-center justify-center">
+                  <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                  Confirmar
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

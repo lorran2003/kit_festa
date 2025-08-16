@@ -9,7 +9,7 @@ export function ButtonCart() {
     const totalItems = order.length + extraPie.length;
     return (
         <button
-            className="fixed top-20 right-4 sm:top-14 sm:right-8 p-4.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer z-40 flex justify-center items-center gap-2 group animate-bounce-in"
+            className="fixed top-20 right-4 sm:top-14 sm:right-8 p-3 lg:p-4.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer z-40 flex justify-center items-center gap-2 group animate-bounce-in"
             type="button"
             aria-label='Visualizar carrinho'
             onClick={() => setModalCart(!modalCart)}
