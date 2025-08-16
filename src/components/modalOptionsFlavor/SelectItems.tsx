@@ -75,7 +75,7 @@ export function SelectItems({ itemList, max, mixName, selectedItems, setSelected
 
 
     return (
-        <div className="flex flex-col items-center justify-center gap-3 w-full lg:pl-4 lg:justify-start lg:gap-4 relative after:static after:w-full after:h-0.5 after:bg-gray-400 after:rounded-full">
+        <div className="flex flex-col items-center justify-center gap-3 w-full lg:pl-4 lg:justify-start lg:gap-4 after:static after:w-full after:h-0.5 after:bg-gray-400 after:rounded-full">
 
             <div className="sticky top-0 flex flex-col items-center justify-center gap-2 w-full bg-zinc-50 z-50 p-1">
                 
